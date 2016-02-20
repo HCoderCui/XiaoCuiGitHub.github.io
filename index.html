@@ -122,8 +122,8 @@
 <p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type:<br></code></pre><br>然后将它们修改为</p>
 <p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type: github<br>  repository: git@github.com:your_user_name/your_user_name.github.io.git<br>  branch: master<br></code></pre><br><strong>NOTE1:</strong></p>
 <p>Repository：必须是SSH形式的url（git@github.com:开头），而不能是HTTPS形式的url（<a href="https://github.com/开头），否则会出现错误：" target="_blank" rel="external">https://github.com/开头），否则会出现错误：</a></p>
-<p><pre><code>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/zhchnchn/zhchnchn.github.io" target="_blank" rel="external">https://github.com/zhchnchn/zhchnchn.github.io</a> is not a valid repositor URL!<br></code></pre><br>因为使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
-<p><pre><code>fatal: Could not read from remote repository.<br>Please make sure you have the correct access rights<br>and the repository exists.<br></code></pre></p>
+<p><pre><code>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/your_user_name/your_user_name.github.io.git" target="_blank" rel="external">https://github.com/your_user_name/your_user_name.github.io.git</a> is not a valid repositor URL!<br></code></pre><br>因为使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
+<p><pre><code>fatal: Could not read from remote repository.<br>Please make sure you have the correct access rights<br>and the repository exists.<br></code></pre><br>完成到此步，已经搭建好了最基本的个人博客！即便从外网访问 your_user_name.github.io 也能访问到你的个人博客。</p>
 </blockquote>
 <h1 id="新建文章和发布"><a href="#新建文章和发布" class="headerlink" title="新建文章和发布"></a>新建文章和发布</h1><p><code> hexo new “postName” </code></p>
 <blockquote>

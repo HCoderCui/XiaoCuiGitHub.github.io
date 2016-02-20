@@ -35,7 +35,7 @@
 
 准备
 (1)node.">
-<meta property="og:updated_time" content="2016-02-20T17:02:49.321Z">
+<meta property="og:updated_time" content="2016-02-20T17:15:46.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Github和Hexo搭建静态博客">
 <meta name="twitter:description" content="背景
@@ -155,8 +155,8 @@
 <p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type:<br></code></pre><br>然后将它们修改为</p>
 <p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type: github<br>  repository: git@github.com:your_user_name/your_user_name.github.io.git<br>  branch: master<br></code></pre><br><strong>NOTE1:</strong></p>
 <p>Repository：必须是SSH形式的url（git@github.com:开头），而不能是HTTPS形式的url（<a href="https://github.com/开头），否则会出现错误：" target="_blank" rel="external">https://github.com/开头），否则会出现错误：</a></p>
-<p><pre><code>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/zhchnchn/zhchnchn.github.io" target="_blank" rel="external">https://github.com/zhchnchn/zhchnchn.github.io</a> is not a valid repositor URL!<br></code></pre><br>因为使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
-<p><pre><code>fatal: Could not read from remote repository.<br>Please make sure you have the correct access rights<br>and the repository exists.<br></code></pre></p>
+<p><pre><code>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/your_user_name/your_user_name.github.io.git" target="_blank" rel="external">https://github.com/your_user_name/your_user_name.github.io.git</a> is not a valid repositor URL!<br></code></pre><br>因为使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
+<p><pre><code>fatal: Could not read from remote repository.<br>Please make sure you have the correct access rights<br>and the repository exists.<br></code></pre><br>完成到此步，已经搭建好了最基本的个人博客！即便从外网访问 your_user_name.github.io 也能访问到你的个人博客。</p>
 </blockquote>
 <h1 id="新建文章和发布"><a href="#新建文章和发布" class="headerlink" title="新建文章和发布"></a>新建文章和发布</h1><p><code> hexo new “postName” </code></p>
 <blockquote>
@@ -243,6 +243,13 @@
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备"><span class="toc-number">2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Hexo"><span class="toc-number">3.</span> <span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置Github"><span class="toc-number">4.</span> <span class="toc-text">配置Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成本地的Blog文件夹"><span class="toc-number">5.</span> <span class="toc-text">生成本地的Blog文件夹</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#部署到Github"><span class="toc-number">6.</span> <span class="toc-text">部署到Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新建文章和发布"><span class="toc-number">7.</span> <span class="toc-text">新建文章和发布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#成功搭建，美化个人博客"><span class="toc-number">8.</span> <span class="toc-text">成功搭建，美化个人博客</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更详细的教程"><span class="toc-number">9.</span> <span class="toc-text">更详细的教程</span></a></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
@@ -389,6 +396,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
