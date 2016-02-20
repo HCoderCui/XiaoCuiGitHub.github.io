@@ -105,19 +105,19 @@
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><blockquote>
 <p>(1)node.js<br>(2)git及github<br>(3)markdown编辑器<br>前两项的安装和github账号的注册，这里就不详述了，网上一大堆教程。<br> markdown编辑器是用来编辑要发布的博文的。所以也要学习一下markdown的基本语法 。</p>
 </blockquote>
-<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><blockquote>
+<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><blockquote>
 <p>安装完Node.js和git后（记得两者都要在Path系统环境变量处添加相应的路径，不然安装会失败），输入 <code>npm install -g hexo</code> 指令即可直接安装Hexo。</p>
 </blockquote>
-<h2 id="配置Github"><a href="#配置Github" class="headerlink" title="配置Github"></a>配置Github</h2><blockquote>
+<h1 id="配置Github"><a href="#配置Github" class="headerlink" title="配置Github"></a>配置Github</h1><blockquote>
 <p>(1)建立与你用户名对应的仓库，仓库名必须为【<strong>your_user_name.github.io</strong>】，<strong>your_user_name</strong>为你注册的Github账户的用户名。</p>
 <p>(2)配置SSH-Key，参考git的使用官方教程。</p>
 </blockquote>
-<h2 id="生成本地的Blog文件夹"><a href="#生成本地的Blog文件夹" class="headerlink" title="生成本地的Blog文件夹"></a>生成本地的Blog文件夹</h2><blockquote>
+<h1 id="生成本地的Blog文件夹"><a href="#生成本地的Blog文件夹" class="headerlink" title="生成本地的Blog文件夹"></a>生成本地的Blog文件夹</h1><blockquote>
 <p>(1)在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令</p>
 <p><pre><code>$ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!<br></code></pre></p>
 <p>(2)Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 <code>npm install</code>（在 /D/Hexo下）<code>npm install</code>，会在D:\Hexo目录中安装 node_modules。</p>
 </blockquote>
-<h2 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h2><blockquote>
+<h1 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h1><blockquote>
 <p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
 <p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type:<br></code></pre><br>然后将它们修改为</p>
 <p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type: github<br>  repository: git@github.com:your_user_name/your_user_name.github.io.git<br>  branch: master<br></code></pre><br><strong>NOTE1:</strong></p>
@@ -125,7 +125,7 @@
 <p><pre><code>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/zhchnchn/zhchnchn.github.io" target="_blank" rel="external">https://github.com/zhchnchn/zhchnchn.github.io</a> is not a valid repositor URL!<br></code></pre><br>因为使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
 <p><pre><code>fatal: Could not read from remote repository.<br>Please make sure you have the correct access rights<br>and the repository exists.<br></code></pre></p>
 </blockquote>
-<h2 id="新建文章和发布"><a href="#新建文章和发布" class="headerlink" title="新建文章和发布"></a>新建文章和发布</h2><p><code> hexo new “postName” </code></p>
+<h1 id="新建文章和发布"><a href="#新建文章和发布" class="headerlink" title="新建文章和发布"></a>新建文章和发布</h1><p><code> hexo new “postName” </code></p>
 <blockquote>
 <p>#新建文章，随后会看到在D:\Hexo\source目录下</p>
 <blockquote>
@@ -149,11 +149,11 @@
 </blockquote>
 </blockquote>
 </blockquote>
-<h2 id="成功搭建，美化个人博客"><a href="#成功搭建，美化个人博客" class="headerlink" title="成功搭建，美化个人博客"></a>成功搭建，美化个人博客</h2><blockquote>
+<h1 id="成功搭建，美化个人博客"><a href="#成功搭建，美化个人博客" class="headerlink" title="成功搭建，美化个人博客"></a>成功搭建，美化个人博客</h1><blockquote>
 <p>利用Hexo的主题功能可以实现更漂亮，功能更多的博客。这里推荐一个Jacman主题。</p>
 <p>如何使用 Jacman 主题：<a href="http://wuchong.me/jacman/2014/11/20/how-to-use-jacman/" target="_blank" rel="external">http://wuchong.me/jacman/2014/11/20/how-to-use-jacman/</a></p>
 </blockquote>
-<h2 id="更详细的教程"><a href="#更详细的教程" class="headerlink" title="更详细的教程"></a>更详细的教程</h2><blockquote>
+<h1 id="更详细的教程"><a href="#更详细的教程" class="headerlink" title="更详细的教程"></a>更详细的教程</h1><blockquote>
 <p>利用Hexo搭建Github的个人主页：<a href="http://blog.csdn.net/zssureqh/article/details/45921911" target="_blank" rel="external">http://blog.csdn.net/zssureqh/article/details/45921911</a></p>
 </blockquote>
 
