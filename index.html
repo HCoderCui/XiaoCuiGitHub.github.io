@@ -94,7 +94,15 @@
 </header>
     <div class="article-content">
         
-        
+        <p>1、背景<br>（1）Hexo是一个开源的静态博客生成框架,由台湾大学生“tommy351”开发，基于NodeJS平台。<br>（2）静态博客的优缺点：<br>        优：编译后是纯html页面,支持托管的站点很多，例如github、gitcafe等，提供展示页和域名绑定功能。<br>        缺：更新文章时，要频繁改动文件，不支持增量式上传的东西，比如ftp，难于管理；还要十分熟悉git各种命令，才能部署页面。<br>2、准备<br>（1）node.js<br>（2）git及github<br>（3）markdown编辑器<br> 前两项的安装和github账号的注册，这里就不详述了，网上一大堆教程。<br> markdown编辑器是用来编辑要发布的博文的。所以也要学习一下markdown的基本语法 。<br>3、安装Hexo<br>安装完Node.js和git后（记得两者都要在Path系统环境变量处添加相应的路径，不然安装会失败），输入npm install -g hexo指令即可直接安装Hexo。<br>4、配置Github<br>（1）建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】，your_user_name为你注册的Github账户的用户名。<br>（2）配置SSH-Key，参考git的使用官方教程。<br>5、生成本地的Blog文件夹<br>（1）在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令<br>$ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!<br>（2）Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 npm install（在 /D/Hexo下）<br>npm install<br>会在D:\Hexo目录中安装 node_modules。<br>6、部署到Github<br>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
+<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><h2 id="Docs-http-hexo-io-docs-deployment-html"><a href="#Docs-http-hexo-io-docs-deployment-html" class="headerlink" title="Docs: http://hexo.io/docs/deployment.html"></a>Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type:<br>然后将它们修改为</p>
+<h1 id="Deployment-1"><a href="#Deployment-1" class="headerlink" title="Deployment"></a>Deployment</h1><h2 id="Docs-http-hexo-io-docs-deployment-html-1"><a href="#Docs-http-hexo-io-docs-deployment-html-1" class="headerlink" title="Docs: http://hexo.io/docs/deployment.html"></a>Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type: github<br>  repository: git@github.com:your_user_name/your_user_name.github.io.git<br>  branch: master<br>NOTE1:</p>
+<p>Repository：必须是SSH形式的url（git@github.com:开头），而不能是HTTPS形式的url（<a href="https://github.com/开头），否则会出现错误：" target="_blank" rel="external">https://github.com/开头），否则会出现错误：</a></p>
+<p>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/zhchnchn/zhchnchn.github.io" target="_blank" rel="external">https://github.com/zhchnchn/zhchnchn.github.io</a> is not a valid repositor URL!<br>使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
+<p>fatal: Could not read from remote repository.</p>
+<p>Please make sure you have the correct access rights<br>and the repository exists.<br>7、新建文章和发布<br>hexo new “postName” </p>
+<p>#新建文章，随后会看到在D:\Hexo\source目录下生成一个名为postName.md的MarkDown文件。利用MarkDown编辑器编辑博文。<br>hexo generate #生成静态页面至public目录<br>hexo deploy #将.deploy目录部署到GitHub。ps:第6步中repository使用git@github.com:的形式，不必每次deploy都要求输入用户名和密码。</p>
+
         
         
         <p class="article-more-link">
@@ -103,6 +111,11 @@
     </div>
     <footer class="article-footer clearfix">
 <div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Hexo总结/">Hexo总结</a>
+</div>
 
 
   <div class="article-tags">
@@ -202,6 +215,17 @@
 <aside class="clearfix">
 
   
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo总结/" title="Hexo总结">Hexo总结<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
 
   
 <div class="tagslist">
