@@ -1,314 +1,359 @@
-<!DOCTYPE HTML>
-<html>
+
+ <!DOCTYPE HTML>
+<html >
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>Technique Sharing About Code</title>
-  <meta name="author" content="Cui Yongdai">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Technique Sharing About Code</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Cui Yongdai">
+    
 
-  
-  <meta property="og:site_name" content="Technique Sharing About Code"/>
+    
+    <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Technique Sharing About Code">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Technique Sharing About Code">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Technique Sharing About Code">
+<meta name="twitter:description">
 
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Technique Sharing About Code" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <meta name="wumiiVerification" content="fb50a101-84fe-4ca2-91a7-ae8cf792978b" />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <meta name="wumiiVerification" content="d73b5866-c390-4156-a4dd-51b526b5335e" />
+    
+    <link rel="alternative" href="/atom.xml" title="Technique Sharing About Code" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
-<body>
-  <header id="header" class="inner"><div class= "header-content">
-	<div class = "alignleft col-one">
-		
-		<div class="header-div">
-		    <h1><a href="/">Technique Sharing About Code</a></h1>
-		    <h2><a href="/">Cuiyd&#39;s Blog</a></h2>
-		</div>
-	</div>
-	<div class = "alignright col-two">
-		
-	</div>
-	<div class="clearfix"></div>
-</div>
-
-<div class= "header-nav">
-	<div id="main-nav" class="alignleft">
-	    
-	      <a href="/">首页</a>
-	    
-	      <a href="/archives">归档</a>
-	    
-	      <a href="/resume">关于我</a>
-	    
-	</div>
-	<div id="sub-nav" class="alignright">
-	    
-	</div>
-	<div class="clearfix"></div>
-</div>
-</header>
-  
-      <div id="content" class="inner">
-  		<div id="main-col" class="alignleft"><div id="wrapper">
-	
-    		<article class="post">
-  
-  <div class="post-content">
+  <body>
     <header>
-        <div class="icon"></div>
-        
-        <time datetime="2016-02-20T12:13:37.000Z"><a href="/2016/02/20/利用Github和Hexo搭建静态博客/">2016-02-20</a></time>
-        
-  
-    <h1 class="title"><a href="/2016/02/20/利用Github和Hexo搭建静态博客/">利用Github和Hexo搭建静态博客</a></h1>
-  
-
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Technique Sharing About Code" title="Technique Sharing About Code"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Technique Sharing About Code">Technique Sharing About Code</a></h1>
+				<h2 class="blog-motto">Cuiyd&#39;s Blog</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
     </header>
+    <div id="container">
+      <div id="main">
 
-    <div class="entry">
-      
-        <div id="toc" class="toc-article">
-	<div class="toc-title">目录</div>
-	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备"><span class="toc-text">准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Hexo"><span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置Github"><span class="toc-text">配置Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成本地的Blog文件夹"><span class="toc-text">生成本地的Blog文件夹</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#部署到Github"><span class="toc-text">部署到Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新建文章和发布"><span class="toc-text">新建文章和发布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#成功搭建，美化个人博客"><span class="toc-text">成功搭建，美化个人博客</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更详细的教程"><span class="toc-text">更详细的教程</span></a></li></ol>
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2016/02/20/利用Github和Hexo搭建静态博客/" title="利用Github和Hexo搭建静态博客" itemprop="url">
+  
+    <h1 itemprop="name">利用Github和Hexo搭建静态博客</h1>
+    
+     
+           <p itemprop="description" >背景
+(1)Hexo是一个开源的静态博客生成框架,由台湾大学生“tommy351”开发，基于NodeJS平台。
+(2)静态博客的优缺点：
+
+优：编译后是纯html页面，支持托管的站点很多，例如github、gitcafe等，提供展示页和域名绑定功能，也是免费使用的，简单易用。
+缺</p>
+        
+    
+    <time datetime="2016-02-20T12:13:37.000Z" itemprop="datePublished">2016-02-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2016/02/20/hello-world/" title="Hello World" itemprop="url">
+  
+    <h1 itemprop="name">Hello World</h1>
+    
+     
+           <p itemprop="description" >Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the </p>
+        
+    
+    <time datetime="2016-02-20T06:26:57.937Z" itemprop="datePublished">2016-02-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+
 </div>
-      
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
-<p>(1)Hexo是一个开源的静态博客生成框架,由台湾大学生“tommy351”开发，基于NodeJS平台。</p>
-<p>(2)静态博客的优缺点：</p>
-<blockquote>
-<p>优：编译后是纯html页面，支持托管的站点很多，例如github、gitcafe等，提供展示页和域名绑定功能，也是免费使用的，简单易用。</p>
-<p>缺：更新文章时，要频繁改动文件，不支持增量式上传的东西，比如ftp，难于管理；还要十分熟悉git各种命令，才能部署页面。</p>
-</blockquote>
-</blockquote>
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><blockquote>
-<p>(1)node.js<br>(2)git及github<br>(3)markdown编辑器<br>前两项的安装和github账号的注册，这里就不详述了，网上一大堆教程。<br> markdown编辑器是用来编辑要发布的博文的。所以也要学习一下markdown的基本语法 。</p>
-</blockquote>
-<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><blockquote>
-<p>安装完Node.js和git后（记得两者都要在Path系统环境变量处添加相应的路径，不然安装会失败），输入 <code>npm install -g hexo</code> 指令即可直接安装Hexo。</p>
-</blockquote>
-<h1 id="配置Github"><a href="#配置Github" class="headerlink" title="配置Github"></a>配置Github</h1><blockquote>
-<p>(1)建立与你用户名对应的仓库，仓库名必须为【<strong>your_user_name.github.io</strong>】，<strong>your_user_name</strong>为你注册的Github账户的用户名。</p>
-<p>(2)配置SSH-Key，参考git的使用官方教程。</p>
-</blockquote>
-<h1 id="生成本地的Blog文件夹"><a href="#生成本地的Blog文件夹" class="headerlink" title="生成本地的Blog文件夹"></a>生成本地的Blog文件夹</h1><blockquote>
-<p>(1)在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令</p>
-<p><pre><code>$ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!<br></code></pre></p>
-<p>(2)Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 <code>npm install</code>（在 /D/Hexo下）<code>npm install</code>，会在D:\Hexo目录中安装 node_modules。</p>
-</blockquote>
-<h1 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h1><blockquote>
-<p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
-<p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type:<br></code></pre><br>然后将它们修改为</p>
-<p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type: github<br>  repository: git@github.com:your_user_name/your_user_name.github.io.git<br>  branch: master<br></code></pre><br><strong>NOTE1:</strong></p>
-<p>Repository：必须是SSH形式的url（git@github.com:开头），而不能是HTTPS形式的url（<a href="https://github.com/开头），否则会出现错误：" target="_blank" rel="external">https://github.com/开头），否则会出现错误：</a></p>
-<p><pre><code>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/your_user_name/your_user_name.github.io.git" target="_blank" rel="external">https://github.com/your_user_name/your_user_name.github.io.git</a> is not a valid repositor URL!<br></code></pre><br>因为使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
-<p><pre><code>fatal: Could not read from remote repository.<br>Please make sure you have the correct access rights<br>and the repository exists.<br></code></pre><br>完成到此步，已经搭建好了最基本的个人博客！即便从外网访问 your_user_name.github.io 也能访问到你的个人博客。</p>
-</blockquote>
-<h1 id="新建文章和发布"><a href="#新建文章和发布" class="headerlink" title="新建文章和发布"></a>新建文章和发布</h1><p><code> hexo new “postName” </code></p>
-<blockquote>
-<p>#新建文章，随后会看到在D:\Hexo\source目录下</p>
-<blockquote>
-<p>#生成一个名为postName.md的MarkDown文件。</p>
-<blockquote>
-<p>#利用MarkDown编辑器编辑博文。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><code>hexo generate</code> </p>
-<blockquote>
-<p>#生成静态页面至public目录</p>
-</blockquote>
-<p><code>hexo deploy</code> </p>
-<blockquote>
-<p>#将.deploy目录部署到GitHub。</p>
-<blockquote>
-<p>#若第6步中repository使用git@github.com:的形式，</p>
-<blockquote>
-<p>#此处则不必每次deploy都要求输入用户名和密码。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="成功搭建，美化个人博客"><a href="#成功搭建，美化个人博客" class="headerlink" title="成功搭建，美化个人博客"></a>成功搭建，美化个人博客</h1><blockquote>
-<p>利用Hexo的主题功能可以实现更漂亮，功能更多的博客。这里推荐一个Jacman主题。</p>
-<p>如何使用 Jacman 主题：<a href="http://wuchong.me/jacman/2014/11/20/how-to-use-jacman/" target="_blank" rel="external">http://wuchong.me/jacman/2014/11/20/how-to-use-jacman/</a></p>
-</blockquote>
-<h1 id="更详细的教程"><a href="#更详细的教程" class="headerlink" title="更详细的教程"></a>更详细的教程</h1><blockquote>
-<p>利用Hexo搭建Github的个人主页：<a href="http://blog.csdn.net/zssureqh/article/details/45921911" target="_blank" rel="external">http://blog.csdn.net/zssureqh/article/details/45921911</a></p>
-</blockquote>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
-      
-    </div>
-    <footer>
-<!--        -->
-        
-        
-        <div class="alignright">
-          <a href="/2016/02/20/利用Github和Hexo搭建静态博客/#comment" class="comment-link">Comments</a>
-        </div>
-        
-<!--        -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-    	
-
-	
-    		<article class="post">
-  
-  <div class="post-content">
-    <header>
-        <div class="icon"></div>
-        
-        <time datetime="2016-02-20T06:26:57.937Z"><a href="/2016/02/20/hello-world/">2016-02-20</a></time>
-        
-  
-    <h1 class="title"><a href="/2016/02/20/hello-world/">Hello World</a></h1>
-  
-
-    </header>
-
-    <div class="entry">
-      
-        <div id="toc" class="toc-article">
-	<div class="toc-title">目录</div>
-	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
-</div>
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer>
-<!--        -->
-        
-        
-        <div class="alignright">
-          <a href="/2016/02/20/hello-world/#comment" class="comment-link">Comments</a>
-        </div>
-        
-<!--        -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-    	
- 
-<nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
-</div></div>
-  		<aside id="sidebar" class="alignright">
-  
-<div class="widget tag">
-  <h3 class="title" id="categories">分類</h3>
-<!--   
-	
-		<li><a href="/categories/Hexo总结/">Hexo总结</a><small>1</small></li>
-	
-   -->
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo总结/">Hexo总结</a><span class="category-list-count">1</span></li></ul> 
-</div>
- 
-
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
 
   
-  <div class="widget tag">
-    <h3 class="title">归档</h3>
-	<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">2016年02月</a><span class="archive-list-count">2</span></li></ul>
-  </div>
-
-
-  
-<div class="widget tagcloud">
-  <h3 class="title">標籤雲</h3>
-  <div class="entry">
-    <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a>
-  </div>
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+<--		<ul>
+		
+		  
+			<li><a href="/categories/Hexo总结/" title="Hexo总结">Hexo总结<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hexo总结/haha/" title="haha">haha<sup>1</sup></a></li>
+		  
+		
+		</ul> -->
+		<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo总结/">Hexo总结</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo总结/haha/">haha</a><span class="category-list-count">1</span></li></ul></li></ul> 
 </div>
 
 
   
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/教程/" title="教程">教程<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://lupeng.me/" target="_blank" title="LP&#39;s Blog">LP&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
 </aside>
-           <div class="clearfix"></div>
-      </div>
-  	
-   <footer id="footer" class="inner"><div class="alignleft">
-
-  &copy; 2016 Cui Yongdai
-  
 </div>
-<div class="alignright">
-  Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme
-  <a href="https://github.com/pengloo53/Hexo-theme-light_cn">light_cn</a>
-</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Cui YongDai in SCUT. <br/>
+			This is my blog, for technique sharing!</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/3865392741" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:455288576@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
 
-<div class="visit">
-	本站总访问量<span id="busuanzi_value_site_pv"></span>次
-  </span>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Cui Yongdai">Cui Yongdai</a>
+		
+		
+		</p>
 </div>
-
-<div class="clearfix"></div></footer>
-  <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
-<!-- 添加『不蒜子』计数服务 -->
-<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
 
 
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?dce613887849d114b64d37be797bf201";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?9acf0cedd48dc53be256ede5a98c2aaa";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
-
-<div id="toTop">
-	<a href="#">▲</a>
-	<a href="#footer">▼</a>
-</div>
-<!--  -->
 
 
-</body>
-</html>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
