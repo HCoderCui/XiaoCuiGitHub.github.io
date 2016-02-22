@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Technique Sharing About Code</title>
+  <title>数组的本质 | Technique Sharing About Code</title>
   <meta name="author" content="Cui Yongdai">
+  
+  <meta name="description" content="原：http://blog.csdn.net/zhangjg_blog/article/details/16116613
+数组是基本上所有语言都会有的一种数据类型，它表示一组相同类型的数据的集合，具有固定的长度，并且在内存中占据连续的空间。在C，C++等语言中，数组的定义简洁清晰，而在java中确有">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="数组的本质"/>
   <meta property="og:site_name" content="Technique Sharing About Code"/>
 
   
@@ -58,9 +61,7 @@
 </header>
   
       <div id="content" class="inner">
-  		<div id="main-col" class="alignleft"><div id="wrapper">
-	
-    		<article class="post">
+  		<div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
@@ -69,7 +70,7 @@
         <time datetime="2016-02-22T09:30:37.000Z"><a href="/2016/02/22/数组的本质/">2016-02-22</a></time>
         
   
-    <h1 class="title"><a href="/2016/02/22/数组的本质/">数组的本质</a></h1>
+    <h1 class="title">数组的本质</h1>
   
 
     </header>
@@ -298,65 +299,26 @@ public static class Son extends Father {
     <footer>
 <!--        -->
         
-        
-        <div class="alignright">
-          <a href="/2016/02/22/数组的本质/#comment" class="comment-link">Comments</a>
-        </div>
-        
-<!--        -->
-      <div class="clearfix"></div>
-    </footer>
+  
+  <div class="categories">
+    <a href="/categories/Java/">Java</a>
   </div>
-</article>
 
-
-
-
-
-    	
-
-	
-    		<article class="post">
-  
-  <div class="post-content">
-    <header>
-        <div class="icon"></div>
-        
-        <time datetime="2016-02-22T06:49:01.845Z"><a href="/2016/02/22/hello-world/">2016-02-22</a></time>
         
   
-    <h1 class="title"><a href="/2016/02/22/hello-world/">Hello World</a></h1>
-  
+  <div class="tags">
+    <a href="/tags/数组/">数组</a>
+  </div>
 
-    </header>
-
-    <div class="entry">
-      
-        <div id="toc" class="toc-article">
-	<div class="toc-title">目录</div>
-	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <div class = "counter">
+  <span id="busuanzi_container_page_pv" style="display:none">
+      总访问&nbsp<span id="busuanzi_value_page_pv"></span>&nbsp次
+  </span>
 </div>
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
-      
-    </div>
-    <footer>
-<!--        -->
-        
-        
-        <div class="alignright">
-          <a href="/2016/02/22/hello-world/#comment" class="comment-link">Comments</a>
-        </div>
-        
 <!--        -->
       <div class="clearfix"></div>
     </footer>
@@ -364,183 +326,33 @@ public static class Son extends Father {
 </article>
 
 
+<section id="comment">
+<!--   <h1 class="title">留言</h1> -->
 
 
+    <!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="2016/02/22/数组的本质/" data-title="数组的本质" data-url="http://yoursite.com/2016/02/22/数组的本质/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"pengloo53"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
 
-    	
 
-	
-    		<article class="post">
   
-  <div class="post-content">
-    <header>
-        <div class="icon"></div>
-        
-        <time datetime="2016-02-22T06:45:50.000Z"><a href="/2016/02/22/【转帖】IT人为什么难以拿到高薪？/">2016-02-22</a></time>
-        
-  
-    <h1 class="title"><a href="/2016/02/22/【转帖】IT人为什么难以拿到高薪？/">IT人为什么难以拿到高薪</a></h1>
-  
-
-    </header>
-
-    <div class="entry">
-      
-        <div id="toc" class="toc-article">
-	<div class="toc-title">目录</div>
-	
-</div>
-      
-        <p>最近在论坛里看到很多人发牢骚，说薪水少，可在我看来，你们这样的人拿得到高薪才怪！ </p>
-<p>　　我先问一句：这里有多少人是本科的？有多少人是正规本科的（不算自考，成考和专升本）？有多少人是有学位的？有多少有学位的是拿着网大排名前50所大学的学位的？恐怕是少之又少吧！在中国，薪水和学位的关系对于应届生来说是绝对的，即使对于以后的发展，学位也很重要，要不那些低学历的人评职称为什么吃亏呢？你可以告诉我这不合理，不错，这确实不合理，但却是现实。如果你不能改变现实，那还是适应它吧！你也可以告诉我低学历一样可以拿高薪，我承认，不过你要准备比别人多付出10倍以上的努力。</p>
-<p>　　接下来是语言，这里恐怕是有不少人没有过四级没学位的吧？有多少过六级的？有多少过专四专八的？有多少有其他英语证书的？你不要和我说你的水平好，可不喜欢中国的考试制度，所以没证书。在中国，毕业一开始的几年就是靠证书，你有本事跳过１楼２楼造３楼吗？如果你英语不行，你有其他二外吗？要知道，老外对于it的重视可是比国内那些买的电脑做装饰品的土老帽要强得多。</p>
-<p>　　其实这些都不是最重要的，最重要的做人的风格，现在很多it人除了技术什么都不懂，整天得罪人。哪怕你是四个ccie全考出的，我不用你难道地球就不转了？中国多的是人，技术有什么了不起的？更何况很多技术是根本用不到的。</p>
-<p>　　现在总看到一些所谓的“技术牛人”在误导新人，你们知不知道你们是在误人子弟啊！自己混不出头，还要去害别人，今天要和你们好好算算帐。</p>
-<p>　　先自我介绍一下，我是98年从上海交大毕业的，在Microsoft（MS）工作了6年，现在在一家系统集成公司工作。</p>
-<p>　　第一个意见：<strong>读书最重要，就是为文凭</strong>。我承认大学里确实学不到什么东西，但为了文凭请一定要认真读。这个社会要文凭，没办法。还有大学成绩要读好一些，像ms,cisco,oracle这些大公司是会看的。读大学还有一个好处是大学很空，你可以自己去学想学的东西，不过学校的功课永远是最重要的。那些大专的不要以为本科生学不好技术，确切得说并没有几个优秀的学生是书呆子。没有什么规定说大专生学技术有优势。</p>
-<p>　　第二个意见：<strong>好好读英语，要想在it立足，英语是必须的。至少要过六级</strong>，如果能有专八或者中高口证书或者bec什么的就更好，最好还要有二外，可以考虑德语或者日语。作it一定要去外企，国企绝对没前途。</p>
-<p>　　第三个意见：要认真选择入的行业。it是非常广泛的概念，网络只是其中一个非常小的（而且也是非常没有前途的）领域。it最有前途的领域是什么？<strong>是开发，开发中最有前途的是什么？是硬件开发，也就是电子工程，那些家伙的月薪差不多是我的年薪（我现在月薪是税后10K）；其次是软件开发，不过很苦，而且需要不错的数学基础，不过在中国不要去搞通用件开发，一盗版全完，最好是搞ERP类的专用系统开发，连开发带维护都有了</strong>。如果你没有数学基础，却有不错的美学功底，那就去搞设计，photoshop也好，autocad也好，3dsmax也好,flash也好，视屏后期处理也好，但不要搞网页设计（无论是前台还是后台），因为一个人作的模扳一万个人用，不会有好的收入的。再不行就来搞网络和系统，这个方面最好搞数据库，不过这样又要涉及到开发，如果搞网络也要搞部署（系统集成），或者去大公司作技术支持，最差的就是作维护了。</p>
-<p>　　为什么说维护是最次的？因为无论是什么公司，维护都不是主营业务，或者说，不会为公司带来收入。在公司，能直接影响利润的部门收入才高，所以说任何企业，最重要的是销售和市场，其次是研发和生产，至于我们维护部门，不过是和扫垃圾的和扫厕所的一个级别而已。</p>
-<p>　　维护虽然是最差的，但不代表不能拿高薪。首先，要去大的外企，他们对于it部门的重视程度高。第二，要学会为人处世，我们本来就是服务部门，所以对其他部门的人要热情一些，主动一些，不要老摆个“高手”的臭架子。要知道，技术如果不能换钱，那不过是垃圾而已。第三，不要老是问老板要钱换设备，我们已经不能产生利益了，就要让老板感觉我们能节约管理成本，我们的任务是最大限度利用现有的设备，而不是整天采购新的设备。</p>
-<p>　　即使如此，我所谓的高薪不过是在维护这个领域里的高薪而已，和其他主要部门是不能比的。所以最好还是跳出这个行业的好，去作系统部署。而作系统部署不要去做部署人员（即使暂时作，将来也一定要做项目经理），这是民工都可以做的。或者就是做方案销售，这样你就是企业的主营业务了。</p>
-<p>　　顺便说一下我对认证的看法，相对与学历和英语，它是最不重要的。当年我去ms，靠的不是什么mcse，而是我的专八和名校学历。ms的面试并不关心你的技术，而是关心你是否聪明，是否能溶入企业文化。还有，国内好象很多人对ms不满，因为软件太贵了，这些钱都进了我们这些技术支持的口袋了，不错，ms的员工薪水很高，可这是我们努力工作换来的，我们每天都要工作12小时左右，xp刚发行那段日子xp组的工程师都要工作到凌晨2-3点，白天还是9点上班，难道我们不该拿高薪吗？至于mcse我是进ms后再考的，没有看过书，全是靠<strong>*</strong>过的，也就是你们所说的paper，不过我想说一句，对于应届生，你不用在意自己是不是paper，因为企业已经默认你是paper了，所以无所谓的。</p>
-<p>　　总结一下，it界不是没有高薪，而且it的高薪在所有理工类行业中是高的。关键是看你自己的能力。对于还没毕业的同学，我希望你们能先认真读书，<strong>至少拿个学士出来（最好是名校的），然后看看能不能考上好的大学的硕士，同时学好英语，多参加社会活动，即使你作it，技术也不过只有20%的比重而已，重要的是沟通和为人处世的技巧。</strong>对于刚出来的大学生，我的意见是先苦几年，多考一些外语和it的证书，准备向外企跳。</p>
-<p>　　最后一句，我所说的也许确实不好听，但事实如此，你可以举很多反例来反驳我（中专生拿高薪之类的），但这些例子是不能反映总体情况的，不信我们可以抽样调查。还有，中国有很多现状是不合理的，但你不能改变它，那要么你适应它，要么你毁灭。在沙漠里谁能活下来？是万物之长的人还是骆驼？（转帖）</p>
-
-      
-    </div>
-    <footer>
-<!--        -->
-        
-        
-        <div class="alignright">
-          <a href="/2016/02/22/【转帖】IT人为什么难以拿到高薪？/#comment" class="comment-link">Comments</a>
-        </div>
-        
-<!--        -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
+</section>
 
 
 
-
-
-    	
-
-	
-    		<article class="post">
-  
-  <div class="post-content">
-    <header>
-        <div class="icon"></div>
-        
-        <time datetime="2016-02-20T12:13:37.000Z"><a href="/2016/02/20/利用Github和Hexo搭建静态博客/">2016-02-20</a></time>
-        
-  
-    <h1 class="title"><a href="/2016/02/20/利用Github和Hexo搭建静态博客/">利用Github和Hexo搭建静态博客</a></h1>
-  
-
-    </header>
-
-    <div class="entry">
-      
-        <div id="toc" class="toc-article">
-	<div class="toc-title">目录</div>
-	<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备"><span class="toc-text">准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Hexo"><span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置Github"><span class="toc-text">配置Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成本地的Blog文件夹"><span class="toc-text">生成本地的Blog文件夹</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#部署到Github"><span class="toc-text">部署到Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新建文章和发布"><span class="toc-text">新建文章和发布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#成功搭建，美化个人博客"><span class="toc-text">成功搭建，美化个人博客</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更详细的教程"><span class="toc-text">更详细的教程</span></a></li></ol>
-</div>
-      
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
-<p>(1)Hexo是一个开源的静态博客生成框架,由台湾大学生“tommy351”开发，基于NodeJS平台。</p>
-<p>(2)静态博客的优缺点：</p>
-<blockquote>
-<p>优：编译后是纯html页面，支持托管的站点很多，例如github、gitcafe等，提供展示页和域名绑定功能，也是免费使用的，简单易用。</p>
-<p>缺：更新文章时，要频繁改动文件，不支持增量式上传的东西，比如ftp，难于管理；还要十分熟悉git各种命令，才能部署页面。</p>
-</blockquote>
-</blockquote>
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><blockquote>
-<p>(1)node.js<br>(2)git及github<br>(3)markdown编辑器<br>前两项的安装和github账号的注册，这里就不详述了，网上一大堆教程。<br> markdown编辑器是用来编辑要发布的博文的。所以也要学习一下markdown的基本语法。</p>
-</blockquote>
-<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><blockquote>
-<p>安装完Node.js和git后（记得两者都要在Path系统环境变量处添加相应的路径，不然安装会失败），输入 <code>npm install -g hexo</code> 指令即可直接安装Hexo。</p>
-</blockquote>
-<h1 id="配置Github"><a href="#配置Github" class="headerlink" title="配置Github"></a>配置Github</h1><blockquote>
-<p>(1)建立与你用户名对应的仓库，仓库名必须为【<strong>your_user_name.github.io</strong>】，<strong>your_user_name</strong>为你注册的Github账户的用户名。</p>
-<p>(2)配置SSH-Key，参考git的使用官方教程。</p>
-</blockquote>
-<h1 id="生成本地的Blog文件夹"><a href="#生成本地的Blog文件夹" class="headerlink" title="生成本地的Blog文件夹"></a>生成本地的Blog文件夹</h1><blockquote>
-<p>(1)在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令</p>
-<p><pre><code>$ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!<br></code></pre></p>
-<p>(2)Hexo随后会自动在目标文件夹建立网站所需要的文件。然后按照提示，运行 <code>npm install</code>（在 /D/Hexo下）<code>npm install</code>，会在D:\Hexo目录中安装 node_modules。</p>
-</blockquote>
-<h1 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h1><blockquote>
-<p>部署到Github前需要配置_config.yml文件，首先找到下面的内容</p>
-<p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type:<br></code></pre><br>然后将它们修改为</p>
-<p><pre><code># Deployment<br>## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a><br>deploy:<br>  type: github<br>  repository: git@github.com:your_user_name/your_user_name.github.io.git<br>  branch: master<br></code></pre><br><strong>NOTE1:</strong></p>
-<p>Repository：必须是SSH形式的url（git@github.com:开头），而不能是HTTPS形式的url（<a href="https://github.com/开头），否则会出现错误：" target="_blank" rel="external">https://github.com/开头），否则会出现错误：</a></p>
-<p><pre><code>$ hexo deploy<br>[info] Start deploying: github<br>[error] <a href="https://github.com/your_user_name/your_user_name.github.io.git" target="_blank" rel="external">https://github.com/your_user_name/your_user_name.github.io.git</a> is not a valid repositor URL!<br></code></pre><br>因为使用SSH url，如果电脑没有开放SSH 端口，会致部署失败。</p>
-<p><pre><code>fatal: Could not read from remote repository.<br>Please make sure you have the correct access rights<br>and the repository exists.<br></code></pre><br>完成到此步，已经搭建好了最基本的个人博客！即便从外网访问 your_user_name.github.io 也能访问到你的个人博客。</p>
-</blockquote>
-<h1 id="新建文章和发布"><a href="#新建文章和发布" class="headerlink" title="新建文章和发布"></a>新建文章和发布</h1><p><code> hexo new “postName” </code></p>
-<blockquote>
-<p>#新建文章，随后会看到在D:\Hexo\source目录下</p>
-<blockquote>
-<p>#生成一个名为postName.md的MarkDown文件。</p>
-<blockquote>
-<p>#利用MarkDown编辑器编辑博文。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><code>hexo generate</code> </p>
-<blockquote>
-<p>#生成静态页面至public目录</p>
-</blockquote>
-<p><code>hexo deploy</code> </p>
-<blockquote>
-<p>#将.deploy目录部署到GitHub。</p>
-<blockquote>
-<p>#若第6步中repository使用git@github.com:的形式，</p>
-<blockquote>
-<p>#此处则不必每次deploy都要求输入用户名和密码。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="成功搭建，美化个人博客"><a href="#成功搭建，美化个人博客" class="headerlink" title="成功搭建，美化个人博客"></a>成功搭建，美化个人博客</h1><blockquote>
-<p>利用Hexo的主题功能可以实现更漂亮，功能更多的博客。这里推荐一个Jacman主题。</p>
-<p>如何使用 Jacman 主题：<a href="http://wuchong.me/jacman/2014/11/20/how-to-use-jacman/" target="_blank" rel="external">http://wuchong.me/jacman/2014/11/20/how-to-use-jacman/</a></p>
-</blockquote>
-<h1 id="更详细的教程"><a href="#更详细的教程" class="headerlink" title="更详细的教程"></a>更详细的教程</h1><blockquote>
-<p>利用Hexo搭建Github的个人主页：<a href="http://blog.csdn.net/zssureqh/article/details/45921911" target="_blank" rel="external">http://blog.csdn.net/zssureqh/article/details/45921911</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer>
-<!--        -->
-        
-        
-        <div class="alignright">
-          <a href="/2016/02/20/利用Github和Hexo搭建静态博客/#comment" class="comment-link">Comments</a>
-        </div>
-        
-<!--        -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-    	
- 
-<nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
 </div></div>
   		<aside id="sidebar" class="alignright">
   
