@@ -88,7 +88,7 @@ Java虚拟机在执行程序的过程中，会把它所管理的内存划分为�
 </div>
       
         <p>—— 学习周志明的《understanding the JVM》</p>
-<h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><blockquote>
+<h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a><strong>运行时数据区域</strong></h2><blockquote>
 <p>Java虚拟机在执行程序的过程中，会把它所管理的内存划分为若干个不同的数据区域。这些区域有各自的用途，创建及销毁的时间。这些区域的生命周期主要与虚拟机进程和用户线程的启动和结束相关。</p>
 </blockquote>
 <p>区域划分如下：</p>
@@ -97,9 +97,9 @@ Java虚拟机在执行程序的过程中，会把它所管理的内存划分为�
 <p>下面一一介绍这些数据区的用途。</p>
 <h3 id="线程私有的数据区域"><a href="#线程私有的数据区域" class="headerlink" title="线程私有的数据区域"></a><strong>线程私有的数据区域</strong></h3><blockquote>
 <p>1.程序计数器  2.Java虚拟机栈  3.本地方法栈</p>
+</blockquote>
 <h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a><strong>程序计数器</strong></h4><p>可以将它理解成当前线程所执行的<strong>字节码指令的行号指示器</strong>（字节码就是Java源程序经编译后生成的文件，Java程序的执行过程实际上是<strong>JVM的字节码解释器执行字节码指令</strong>），在JVM的概念模型里，字节码解释器就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，进而来完成<strong>分支、循环、跳转、异常处理、线程恢复</strong>等基础功能。</p>
 <h5 id="线程恢复"><a href="#线程恢复" class="headerlink" title="线程恢复"></a><strong>线程恢复</strong></h5><p>这里再说说是如何实现线程恢复的。首先一个处理器一次只能执行一个线程，要在一个处理器要实现多线程，<strong>JVM是通过线程轮流切换并分配处理器执行时间的方式（操作系统中线程调度算法）</strong>来实现的。<strong>每条线程都有一个独立的程序计数器，且各条线程之间计数器互不影响。</strong>在线程切换的过程中，程序计数器记录下该线程的当前执行位置，当该线程再次被切换时，就可以恢复原来的执行位置了。现在，你也应该理解为什么程序计数器属于线程私有了吧。</p>
-</blockquote>
 <h4 id="Java虚拟机栈（Java方法执行的内存模型）"><a href="#Java虚拟机栈（Java方法执行的内存模型）" class="headerlink" title="Java虚拟机栈（Java方法执行的内存模型）"></a><strong>Java虚拟机栈（Java方法执行的内存模型）</strong></h4><ul>
 <li>Java虚拟机栈里面装的是一个个栈帧（Stack Frame）。栈帧存储了局部变量名、操作数栈、动态链接、方法出口等信息。</li>
 <li>每个方法执行的时候都会创建一个栈帧。一个方法从调研直至执行完成，对应着一个栈帧在虚拟机栈中入栈和出栈的过程。<h5 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a><strong>局部变量表</strong></h5></li>
@@ -113,11 +113,11 @@ Java虚拟机在执行程序的过程中，会把它所管理的内存划分为�
 <h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a><strong>本地方法栈</strong></h4><p>与虚拟机栈相似，只是本地方法栈为虚拟机用到的Native方法服务，而虚拟机栈里面装的是Java方法（字节码）<br>Native方法：用来扩展Java程序的功能，如访问到操作系统底层。可以将native方法比作Java程序和C程序接口，如JNI技术。</p>
 <h3 id="线程共享的数据区"><a href="#线程共享的数据区" class="headerlink" title="线程共享的数据区"></a><strong>线程共享的数据区</strong></h3><blockquote>
 <p>1.Java堆  2.方法区</p>
+</blockquote>
 <h4 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a><strong>Java堆</strong></h4><ul>
 <li>随虚拟机启动时创建，为所有<strong>对象实例及数组</strong>分配内存，GC管理的主要区域</li>
 <li>区域细分图如下：首先从内存回收的角度，分为Young Generation和Old Generation。Young又细分为Eden Space和Survivor Space。Survivor又分为From Survivor和To Survivor空间。这些区域的作用及分配和回收细节见下文GC机制的讨论。<br><img src="http://img.blog.csdn.net/20160303004105051" alt="Java堆区域结构"><br>从内存分配的角度，线程共享的Java堆可能会划分多个线程私有的分配缓冲区（Thread Local Allocation Buffer，TLAB）。这样进一步划分，能够更快地分配内存、更好地回收内存。</li>
 </ul>
-</blockquote>
 <h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a><strong>方法区</strong></h4><ul>
 <li>用于存储虚拟机加载的<strong>类信息、常量、静态变量</strong>、即时编译器编译后的代码等数据。</li>
 <li>内存回收目标主要是针对常量池的回收和对类型的卸载。</li>
