@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【JVM学习笔记】——运行时数据区 | Technique Sharing About Code</title>
+  <meta name="author" content="Cui Yongdai">
+  
+  <meta name="description" content="—— 学习周志明的《understanding the JVM》
+运行时数据区域
+Java虚拟机在执行程序的过程中，会把它所管理的内存划分为若干个不同的数据区域。这些区域有各自的用途，创建及销毁的时间。这些区域的生命周期主要与虚拟机进程和用户线程的启动和结束相关。
+
+区域划分如下：
+
+其中方法区和堆">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【JVM学习笔记】——运行时数据区"/>
+  <meta property="og:site_name" content="Technique Sharing About Code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Technique Sharing About Code" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <meta name="wumiiVerification" content="fb50a101-84fe-4ca2-91a7-ae8cf792978b" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="wumiiVerification" content="d73b5866-c390-4156-a4dd-51b526b5335e" />
+</head>
+
+<body>
+  <header id="header" class="inner"><div class= "header-content">
+	<div class = "alignleft col-one">
+		
+		<div class="header-div">
+		    <h1><a href="/">Technique Sharing About Code</a></h1>
+		    <h2><a href="/">Cuiyd&#39;s Blog</a></h2>
+		</div>
+	</div>
+	<div class = "alignright col-two">
+		
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<div class= "header-nav">
+	<div id="main-nav" class="alignleft">
+	    
+	      <a href="/">首页</a>
+	    
+	      <a href="/archives">归档</a>
+	    
+	      <a href="/resume">关于我</a>
+	    
+	</div>
+	<div id="sub-nav" class="alignright">
+	    
+	</div>
+	<div class="clearfix"></div>
+</div>
+</header>
+  
+      <div id="content" class="inner">
+  		<div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+        <div class="icon"></div>
+        
+        <time datetime="2016-03-19T05:41:43.000Z"><a href="/2016/03/19/【JVM学习笔记】——运行时数据区/">2016-03-19</a></time>
+        
+  
+    <h1 class="title">【JVM学习笔记】——运行时数据区</h1>
+  
+
+    </header>
+
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+	<div class="toc-title">目录</div>
+	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#运行时数据区域"><span class="toc-text">运行时数据区域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程私有的数据区域"><span class="toc-text">线程私有的数据区域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序计数器"><span class="toc-text">程序计数器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#线程恢复"><span class="toc-text">线程恢复</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java虚拟机栈（Java方法执行的内存模型）"><span class="toc-text">Java虚拟机栈（Java方法执行的内存模型）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#局部变量表"><span class="toc-text">局部变量表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#异常状况"><span class="toc-text">异常状况</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地方法栈"><span class="toc-text">本地方法栈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程共享的数据区"><span class="toc-text">线程共享的数据区</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java堆"><span class="toc-text">Java堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法区"><span class="toc-text">方法区</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#运行时常量池"><span class="toc-text">运行时常量池</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+      
+        <p>—— 学习周志明的《understanding the JVM》</p>
+<h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><blockquote>
+<p>Java虚拟机在执行程序的过程中，会把它所管理的内存划分为若干个不同的数据区域。这些区域有各自的用途，创建及销毁的时间。这些区域的生命周期主要与虚拟机进程和用户线程的启动和结束相关。</p>
+</blockquote>
+<p>区域划分如下：</p>
+<p><img src="http://img.blog.csdn.net/20160302144057265" alt="JVM运行时数据区"></p>
+<p><strong>其中方法区和堆是所有线程共享的数据区，另外的就是线程隔离的数据区。</strong></p>
+<p>下面一一介绍这些数据区的用途。</p>
+<h3 id="线程私有的数据区域"><a href="#线程私有的数据区域" class="headerlink" title="线程私有的数据区域"></a><strong>线程私有的数据区域</strong></h3><blockquote>
+<p>1.程序计数器  2.Java虚拟机栈  3.本地方法栈</p>
+<h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a><strong>程序计数器</strong></h4><p>可以将它理解成当前线程所执行的<strong>字节码指令的行号指示器</strong>（字节码就是Java源程序经编译后生成的文件，Java程序的执行过程实际上是<strong>JVM的字节码解释器执行字节码指令</strong>），在JVM的概念模型里，字节码解释器就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，进而来完成<strong>分支、循环、跳转、异常处理、线程恢复</strong>等基础功能。</p>
+<h5 id="线程恢复"><a href="#线程恢复" class="headerlink" title="线程恢复"></a><strong>线程恢复</strong></h5><p>这里再说说是如何实现线程恢复的。首先一个处理器一次只能执行一个线程，要在一个处理器要实现多线程，<strong>JVM是通过线程轮流切换并分配处理器执行时间的方式（操作系统中线程调度算法）</strong>来实现的。<strong>每条线程都有一个独立的程序计数器，且各条线程之间计数器互不影响。</strong>在线程切换的过程中，程序计数器记录下该线程的当前执行位置，当该线程再次被切换时，就可以恢复原来的执行位置了。现在，你也应该理解为什么程序计数器属于线程私有了吧。</p>
+</blockquote>
+<h4 id="Java虚拟机栈（Java方法执行的内存模型）"><a href="#Java虚拟机栈（Java方法执行的内存模型）" class="headerlink" title="Java虚拟机栈（Java方法执行的内存模型）"></a><strong>Java虚拟机栈（Java方法执行的内存模型）</strong></h4><ul>
+<li>Java虚拟机栈里面装的是一个个栈帧（Stack Frame）。栈帧存储了局部变量名、操作数栈、动态链接、方法出口等信息。</li>
+<li>每个方法执行的时候都会创建一个栈帧。一个方法从调研直至执行完成，对应着一个栈帧在虚拟机栈中入栈和出栈的过程。<h5 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a><strong>局部变量表</strong></h5></li>
+<li>有的人Java内存区分为堆内存和栈内存。这是比较粗糙的分法。这里所指的”栈”，就是现在讲的虚拟机栈，再狭窄一点就是虚拟机栈中的局部变量表部分。</li>
+<li>局部变量表存放了<strong>编译器</strong>可知的各种基本数据类型、引用类型和returnAddress类型（指向了一条字节码指令的地址）。</li>
+<li>局部变量表所需的内存空间在编译期间完成分配，进入一个方法时，栈帧要分配多大的局部变量空间是完全确定的，运行时不会改变。<h5 id="异常状况"><a href="#异常状况" class="headerlink" title="异常状况"></a><strong>异常状况</strong></h5></li>
+<li>StackOverflowError：线程请求的栈深度大于虚拟机允许的深度</li>
+<li>OutOfMemoryError：虚拟机栈动态扩展时无法申请到足够的内存</li>
+</ul>
+<p>在JVM规范中，该区域规定了以上两种异常情况，即如果抛出以上异常，则该区域出现了问题。</p>
+<h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a><strong>本地方法栈</strong></h4><p>与虚拟机栈相似，只是本地方法栈为虚拟机用到的Native方法服务，而虚拟机栈里面装的是Java方法（字节码）<br>Native方法：用来扩展Java程序的功能，如访问到操作系统底层。可以将native方法比作Java程序和C程序接口，如JNI技术。</p>
+<h3 id="线程共享的数据区"><a href="#线程共享的数据区" class="headerlink" title="线程共享的数据区"></a><strong>线程共享的数据区</strong></h3><blockquote>
+<p>1.Java堆  2.方法区</p>
+<h4 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a><strong>Java堆</strong></h4><ul>
+<li>随虚拟机启动时创建，为所有<strong>对象实例及数组</strong>分配内存，GC管理的主要区域</li>
+<li>区域细分图如下：首先从内存回收的角度，分为Young Generation和Old Generation。Young又细分为Eden Space和Survivor Space。Survivor又分为From Survivor和To Survivor空间。这些区域的作用及分配和回收细节见下文GC机制的讨论。<br><img src="http://img.blog.csdn.net/20160303004105051" alt="Java堆区域结构"><br>从内存分配的角度，线程共享的Java堆可能会划分多个线程私有的分配缓冲区（Thread Local Allocation Buffer，TLAB）。这样进一步划分，能够更快地分配内存、更好地回收内存。</li>
+</ul>
+</blockquote>
+<h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a><strong>方法区</strong></h4><ul>
+<li>用于存储虚拟机加载的<strong>类信息、常量、静态变量</strong>、即时编译器编译后的代码等数据。</li>
+<li>内存回收目标主要是针对常量池的回收和对类型的卸载。</li>
+<li>与Java堆相比，这区域可以选择不实现GC，因为一般来说，回收的内存并不多、性价并不高。<h5 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a><strong>运行时常量池</strong></h5></li>
+<li>运行时常量池是方法区的一部分</li>
+<li>Class文件包含一项信息是常量池（Constant Pool Table），用于存放编译器生成的<strong>各种字面量和符号引用</strong>。（类加载过程中，进入方法区的运行时常量池中存放）</li>
+</ul>
+
+      
+    </div>
+    <footer>
+<!--        -->
+        
+  
+  <div class="categories">
+    <a href="/categories/JVM/">JVM</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/JVM/">JVM</a>
+  </div>
+
+        <div class = "counter">
+  <span id="busuanzi_container_page_pv" style="display:none">
+      总访问&nbsp<span id="busuanzi_value_page_pv"></span>&nbsp次
+  </span>
+</div>
+        
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!--        -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+<!--   <h1 class="title">留言</h1> -->
+
+
+    <!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="2016/03/19/【JVM学习笔记】——运行时数据区/" data-title="【JVM学习笔记】——运行时数据区" data-url="http://yoursite.com/2016/03/19/【JVM学习笔记】——运行时数据区/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"pengloo53"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+
+  
+</section>
+
+
+
+</div></div>
+  		<aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title" id="categories">分類</h3>
+<!--   
+	
+		<li><a href="/categories/Hexo总结/">Hexo总结</a><small>1</small></li>
+	
+  
+	
+		<li><a href="/categories/JVM/">JVM</a><small>1</small></li>
+	
+  
+	
+		<li><a href="/categories/Java/">Java</a><small>1</small></li>
+	
+  
+	
+		<li><a href="/categories/杂谈/">杂谈</a><small>2</small></li>
+	
+   -->
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo总结/">Hexo总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/">杂谈</a><span class="category-list-count">2</span></li></ul> 
+</div>
+ 
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">归档</h3>
+	<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">2016年03月</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">2016年02月</a><span class="archive-list-count">5</span></li></ul>
+  </div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IT人/" style="font-size: 10px;">IT人</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a>
+  </div>
+</div>
+
+</aside>
+           <div class="clearfix"></div>
+      </div>
+  	
+   <footer id="footer" class="inner"><div class="alignleft">
+
+  &copy; 2016 Cui Yongdai
+  
+</div>
+<div class="alignright">
+  Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme
+  <a href="https://github.com/pengloo53/Hexo-theme-light_cn">light_cn</a>
+</div>
+
+<div class="visit">
+	本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+<div class="clearfix"></div></footer>
+  <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<!-- 添加『不蒜子』计数服务 -->
+<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?dce613887849d114b64d37be797bf201";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?9acf0cedd48dc53be256ede5a98c2aaa";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+<div id="toTop">
+	<a href="#">▲</a>
+	<a href="#footer">▼</a>
+</div>
+<!--  -->
+
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【JVM学习笔记】——GC机制 | Technique Sharing About Code</title>
+  <meta name="author" content="Cui Yongdai">
+  
+  <meta name="description" content="GC机制内存回收的主要对象
+我们知道Java运行时数据区域主要分为5部分：程序计数器、虚拟机栈、本地方法栈，以及Java堆、方法区。
+由于程序计数器、虚拟机栈、本地方法栈3个区域生命周期依赖于线程，且每一个栈帧分配多少内存基本上在类结构确定下来就已知的，故这些区域的内存分配和回收具备确定性。
+而，J">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【JVM学习笔记】——GC机制"/>
+  <meta property="og:site_name" content="Technique Sharing About Code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Technique Sharing About Code" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <meta name="wumiiVerification" content="fb50a101-84fe-4ca2-91a7-ae8cf792978b" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="wumiiVerification" content="d73b5866-c390-4156-a4dd-51b526b5335e" />
+</head>
+
+<body>
+  <header id="header" class="inner"><div class= "header-content">
+	<div class = "alignleft col-one">
+		
+		<div class="header-div">
+		    <h1><a href="/">Technique Sharing About Code</a></h1>
+		    <h2><a href="/">Cuiyd&#39;s Blog</a></h2>
+		</div>
+	</div>
+	<div class = "alignright col-two">
+		
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<div class= "header-nav">
+	<div id="main-nav" class="alignleft">
+	    
+	      <a href="/">首页</a>
+	    
+	      <a href="/archives">归档</a>
+	    
+	      <a href="/resume">关于我</a>
+	    
+	</div>
+	<div id="sub-nav" class="alignright">
+	    
+	</div>
+	<div class="clearfix"></div>
+</div>
+</header>
+  
+      <div id="content" class="inner">
+  		<div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+        <div class="icon"></div>
+        
+        <time datetime="2016-03-19T05:45:40.000Z"><a href="/2016/03/19/【JVM学习笔记】——GC机制/">2016-03-19</a></time>
+        
+  
+    <h1 class="title">【JVM学习笔记】——GC机制</h1>
+  
+
+    </header>
+
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+	<div class="toc-title">目录</div>
+	<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GC机制"><span class="toc-text">GC机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存回收的主要对象"><span class="toc-text">内存回收的主要对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#确定对象已死"><span class="toc-text">确定对象已死</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用计数算法"><span class="toc-text">引用计数算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可达性分析算法"><span class="toc-text">可达性分析算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一个对象的死亡（真正被回收）至少要经历两次标记"><span class="toc-text">一个对象的死亡（真正被回收）至少要经历两次标记</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#第一次标记"><span class="toc-text">第一次标记</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#finalize方法"><span class="toc-text">finalize方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第二次标记"><span class="toc-text">第二次标记</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收算法"><span class="toc-text">垃圾回收算法</span></a></li></ol></li></ol>
+</div>
+      
+        <h2 id="GC机制"><a href="#GC机制" class="headerlink" title="GC机制"></a>GC机制</h2><h3 id="内存回收的主要对象"><a href="#内存回收的主要对象" class="headerlink" title="内存回收的主要对象"></a>内存回收的主要对象</h3><ul>
+<li>我们知道Java运行时数据区域主要分为5部分：程序计数器、虚拟机栈、本地方法栈，以及Java堆、方法区。</li>
+<li>由于程序计数器、虚拟机栈、本地方法栈3个区域生命周期依赖于线程，且每一个栈帧分配多少内存基本上在类结构确定下来就已知的，故这些区域的内存分配和回收具备确定性。</li>
+<li>而，Java堆和方法区是不确定的，一个接口的多个实现类需要的内存不一样，一个方法中的多个分支需要的内存也不一样，只有在程序运行期间才能知道创建哪些对象，内存分配和回收是动态的。</li>
+<li>垃圾收集器GC主要关注的是 —— Java堆和方法区，也是线程共享的区域。<h3 id="确定对象已死"><a href="#确定对象已死" class="headerlink" title="确定对象已死"></a>确定对象已死</h3><h4 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h4>原理：给对象添加一个引用计数器、每当有一个地方引用它的时候，计数器+1；引用失效时，计数器-1；任何时刻计数器为0的对象就不可能再被使用。<br>缺陷：难以解决对象之间相互循环引用的问题。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class A &#123;&#10;&#9;Object o = null;&#10;&#9;public static void testGC()&#123;&#10;&#9;&#9;A a1 = new A();       //a1&#12289;a2&#24341;&#29992;&#35745;&#25968;&#22120;&#22686;&#33267;1&#10;&#9;&#9;A a2 = new A();&#10;&#9;&#9;a1.o = a2;            //a1&#12289;a2&#24341;&#29992;&#35745;&#25968;&#22120;&#22686;&#33267;2&#10;&#9;&#9;a2.o = a1;&#10;&#10;&#9;&#9;a1 = null;           //a1&#12289;a2&#24341;&#29992;&#35745;&#25968;&#22120;&#20943;&#33267;1&#65292;&#20294;&#20004;&#21508;&#39033;&#20173;&#30456;&#20114;&#24341;&#29992;&#10;&#9;&#9;a2 = null;           //&#35299;&#20915;&#26041;&#27861;&#65306;&#20808;&#25191;&#34892;&#35821;&#35328;a1.o=null&#21644;a2.o=null&#65292;&#35753;&#30456;&#20114;&#24341;&#29992;&#22833;&#25928;&#10;&#10;&#9;&#9;System.gc();&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a><strong>可达性分析算法</strong></h4><p>由于引用计数算法的缺陷，主流实现中通过可达性分析（Reachability Analysis）来判断对象的存活。<br>原理：通过一系列称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链（从图论的角度，即不可达），则证明此对象是不可用的。</p>
+<p>如下：object5、object6、object7虽然有关联，但到GC Root是不可达的，所以会被定为是可回收的对象。<br><img src="http://img.blog.csdn.net/20160304111636429" alt="可达性分析"><br>在Java语言中，可作为GC Roots的对象：</p>
+<ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI（Native方法）引用的对象</li>
+</ul>
+<h4 id="一个对象的死亡（真正被回收）至少要经历两次标记"><a href="#一个对象的死亡（真正被回收）至少要经历两次标记" class="headerlink" title="一个对象的死亡（真正被回收）至少要经历两次标记"></a><strong>一个对象的死亡（真正被回收）至少要经历两次标记</strong></h4><h5 id="第一次标记"><a href="#第一次标记" class="headerlink" title="第一次标记"></a><strong>第一次标记</strong></h5><p>当对象在进行可达性分析后，发现没有到GC Root的引用链，则会发生第一次标记，但并未回收。</p>
+<h5 id="finalize方法"><a href="#finalize方法" class="headerlink" title="finalize方法"></a><strong>finalize方法</strong></h5><p>发生第一次标记后，GC会对已有一次标记的对象进行第二次筛选：覆盖了finalize()方法且方法未被虚拟机调用的对象将被认为有必要执行finalize()。对象会被放置在一个叫做F-Queue的队列之中，并在稍后一个由虚拟机自动建立的、低优先级的Finalizer线程执行它。<br>在触发了finalize方法后，若方法中能够将对象自身(this)与引用链(Reference Chain)上任何一个对象建立关联，则对象自救成功，第二次标记时，它将被移出“即将回收的集合”。</p>
+<h5 id="第二次标记"><a href="#第二次标记" class="headerlink" title="第二次标记"></a><strong>第二次标记</strong></h5><p>在finalize()方法中，对象若无法拯救自己，则GC对它进行第二次标记，这时该对象将要被回收。</p>
+<h3 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a><strong>垃圾回收算法</strong></h3><p>经过可达性分析算法确定存活和回收对象后，JVM就会采用垃圾回收算法进行回收，当然不同的虚拟机对回收算法的实现都有不同，这里只是大概总结集中算法的思想。</p>
+<ol>
+<li><p><strong>标记-清除算法（Mark-Sweep）</strong></p>
+<p> 主要分为两个步骤：标记需要回收的对象；完成标记后统一回收被标记的对象。</p>
+<p> 缺陷：标记清除后产生大量<strong>不连续的内存碎片</strong>，导致当下一次需要分配较大对象（如数组）时，无法提供足够的连续内存而不得不提取触发一次GC。</p>
+</li>
+<li><p><strong>复制算法</strong></p>
+<p> 这是用于回收新生代的主流算法。基本思想：将内存分成两块A、B，当A内存用完了，将存活的对象复制到B上，再把A用过的内存清理掉，每次只对一块内存进行回收，得到连续内存空间，解决了标记清除算法的缺陷。</p>
+<p> 这种算法将内存缩小为原理的一半，代价很高。<strong>故基于新生代中对象“朝生夕死”的特点，将内存分为多个块。</strong>通常的做法是，分成一块较大的Eden空间和两个较小的Survivor空间。每次对Eden和其中一个Survivor空间回收，存活的对象一次性复制到另一个Survivor区中。这样只是浪费了一个小的Survivor区。在进行JVM优化时，可根据实际情况，调整各区域的大小比例。</p>
+<p> 那当Survivor空间也不够用怎么办呢？堆内存还有一个年老代（Old Generation），用于提供分配担保（Handle Promotion）。新生代收集下拉的存活对象会直接通过分配担保机制进入年老代。</p>
+</li>
+<li><p><strong>标记-整理算法（Mark-Compact）</strong></p>
+<p> 用于回收年老代。标记完成后，将所有存活的对象向一端移动，然后直接清除其他内存。</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>分代收集算法</strong></p>
+<p> 针对Java堆中各个年代的特点采用最恰当的收集算法。</p>
+<p> 新生代，对象存活率低，采用复制算法，复制成本低。</p>
+<p> 年老代，对象存活率高，没有分配担保，必须采用“标记-清除”或“标记整理”算法。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+<!--        -->
+        
+        
+        <div class = "counter">
+  <span id="busuanzi_container_page_pv" style="display:none">
+      总访问&nbsp<span id="busuanzi_value_page_pv"></span>&nbsp次
+  </span>
+</div>
+        
+  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!--        -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+<!--   <h1 class="title">留言</h1> -->
+
+
+    <!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="2016/03/19/【JVM学习笔记】——GC机制/" data-title="【JVM学习笔记】——GC机制" data-url="http://yoursite.com/2016/03/19/【JVM学习笔记】——GC机制/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"pengloo53"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+
+  
+</section>
+
+
+
+</div></div>
+  		<aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title" id="categories">分類</h3>
+<!--   
+	
+		<li><a href="/categories/Hexo总结/">Hexo总结</a><small>1</small></li>
+	
+  
+	
+		<li><a href="/categories/JVM/">JVM</a><small>1</small></li>
+	
+  
+	
+		<li><a href="/categories/Java/">Java</a><small>1</small></li>
+	
+  
+	
+		<li><a href="/categories/杂谈/">杂谈</a><small>2</small></li>
+	
+   -->
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo总结/">Hexo总结</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/">杂谈</a><span class="category-list-count">2</span></li></ul> 
+</div>
+ 
+
+
+  
+  <div class="widget tag">
+    <h3 class="title">归档</h3>
+	<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">2016年03月</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">2016年02月</a><span class="archive-list-count">5</span></li></ul>
+  </div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IT人/" style="font-size: 10px;">IT人</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a>
+  </div>
+</div>
+
+</aside>
+           <div class="clearfix"></div>
+      </div>
+  	
+   <footer id="footer" class="inner"><div class="alignleft">
+
+  &copy; 2016 Cui Yongdai
+  
+</div>
+<div class="alignright">
+  Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme
+  <a href="https://github.com/pengloo53/Hexo-theme-light_cn">light_cn</a>
+</div>
+
+<div class="visit">
+	本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+<div class="clearfix"></div></footer>
+  <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<!-- 添加『不蒜子』计数服务 -->
+<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?dce613887849d114b64d37be797bf201";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?9acf0cedd48dc53be256ede5a98c2aaa";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+<div id="toTop">
+	<a href="#">▲</a>
+	<a href="#footer">▼</a>
+</div>
+<!--  -->
+
+
+</body>
+</html>
